@@ -8,7 +8,7 @@ import MainContent from './components/MainContent.jsx'
 import Footer from './components/Footer.jsx'
 import UserProfile from './components/UserProfile.jsx'
 import Counter from './components/Counter.jsx'
-import UserContext from './UserContext.js'
+import UserContext from './components/UserContext.js'
 import ProfilePage from './components/ProfilePage.jsx'
 
 function App() {
