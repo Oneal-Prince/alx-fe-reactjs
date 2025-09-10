@@ -8,13 +8,16 @@ import MainContent from './components/MainContent.jsx'
 import Footer from './components/Footer.jsx'
 import UserProfile from './components/UserProfile.jsx'
 import Counter from './components/Counter.jsx'
+import UserContext from './UserContext.js'
+import ProfilePage from './components/ProfilePage.jsx'
 
 function App() {
   
 
   return (
     <>
-
+    <ProfilePage />
+    <UserContext.Provider value={userData} />
     <WelcomeMessage />
     <Header />
     <MainContent />
