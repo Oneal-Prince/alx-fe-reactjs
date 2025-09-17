@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 import useRecipeStore from './recipeStore';
 
 const RecipeList = () => {
@@ -6,7 +7,6 @@ const RecipeList = () => {
   const filterRecipes = useRecipeStore((state) => state.filterRecipes);
   const searchTerm = useRecipeStore((state) => state.searchTerm);
 
-  // 🔁 Run filterRecipes whenever searchTerm changes
   useEffect(() => {
     filterRecipes();
   }, [searchTerm, filterRecipes]);
@@ -18,7 +18,11 @@ const RecipeList = () => {
       ) : (
         filteredRecipes.map((recipe) => (
           <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
+            <h3>
+              <Link to={`/recipes/${recipe.id}`}>
+                {recipe.title}
+              </Link>
+            </h3>
             <p>{recipe.description}</p>
           </div>
         ))
