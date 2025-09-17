@@ -1,4 +1,5 @@
-
+import React from 'react'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import './App.css'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
@@ -13,9 +14,13 @@ function App() {
     <>
       <RecipeList />
       <AddRecipeForm />
-      <RecipeDetails />
-      <DeleteRecipeButton />
-      <EditRecipeForm />      
+     <Router>
+      <Routes>
+        <Route path="/" element={<RecipeList />} /> 
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+        <Route path="/edit/:id" element={<EditRecipeForm />} />
+      </Routes>
+    </Router>    
     </>
   )
 }
