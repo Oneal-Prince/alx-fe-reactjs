@@ -1,6 +1,5 @@
 import React from 'react'
-import { BrowserRouter,Routes,Route } from 'react-router'
-import './App.css'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
 import DeleteRecipeButton from './components/DeleteRecipeButton'
