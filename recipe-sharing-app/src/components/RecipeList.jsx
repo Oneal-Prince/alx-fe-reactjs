@@ -1,17 +1,30 @@
- import useRecipeStore from "./recipeStore";
+import { useEffect } from 'react';
+import useRecipeStore from './recipeStore';
 
-  const RecipeList = () => {
-    const recipes = useRecipeStore(state => state.recipes);
+const RecipeList = () => {
+  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+  const filterRecipes = useRecipeStore((state) => state.filterRecipes);
+  const searchTerm = useRecipeStore((state) => state.searchTerm);
 
-    return (
-      <div>
-        {recipes.map(recipe => (
+  // 🔁 Run filterRecipes whenever searchTerm changes
+  useEffect(() => {
+    filterRecipes();
+  }, [searchTerm, filterRecipes]);
+
+  return (
+    <div>
+      {filteredRecipes.length === 0 ? (
+        <p>No recipes found.</p>
+      ) : (
+        filteredRecipes.map((recipe) => (
           <div key={recipe.id}>
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
           </div>
-        ))}
-      </div>
-    );
-  };
-  export default RecipeList; 
+        ))
+      )}
+    </div>
+  );
+};
+
+export default RecipeList;
