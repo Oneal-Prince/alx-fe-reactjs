@@ -6,6 +6,8 @@ import DeleteRecipeButton from './components/DeleteRecipeButton'
 import EditRecipeForm from './components/EditRecipeForm'
 import RecipeDetails from './components/RecipeDetails'
 import SearchBar from './components/SearchBar'
+import FavoritesList from './components/FavoritesList'
+import RecommendationsList from './components/RecommendationsList'
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
       </Routes>
     </Router>   
     <SearchBar /> 
+    <FavoritesList />
+    <RecommendationsList />
     </>
   )
 }
