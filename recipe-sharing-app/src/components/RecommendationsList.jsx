@@ -1,4 +1,5 @@
 import React from 'react';
+import useRecipeStore from './recipeStore';
 
 const RecommendationsList = ({ recommendedRecipes = [], title = "Recommended for You" }) => {
   if (recommendedRecipes.length === 0) {
