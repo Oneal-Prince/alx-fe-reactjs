@@ -1,18 +1,35 @@
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService"; // 👈 import here
 
-export default function Search({ onSearch, user, loading, error }) {
+export default function Search() {
   const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username.trim()) return;
-    onSearch(username.trim());
+
+    setLoading(true);
+    setError("");
+    setUser(null);
+
+    try {
+      const data = await fetchUserData(username); // 👈 call API directly
+      setUser(data);
+    } catch {
+      setError("Looks like we cant find the user");
+    } finally {
+      setLoading(false);
+    }
+
     setUsername("");
   };
 
   return (
     <div>
-    
+      {/* Search Form */}
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
@@ -29,9 +46,9 @@ export default function Search({ onSearch, user, loading, error }) {
         </button>
       </form>
 
-    
+      {/* Conditional Rendering */}
       {loading && <p className="mt-4 text-gray-600">Loading...</p>}
-      {error && <p className="mt-4 text-red-500">Looks like we cant find the user</p>}
+      {error && <p className="mt-4 text-red-500">{error}</p>}
       {user && (
         <div className="mt-6 p-4 border rounded-lg shadow bg-white">
           <img
