@@ -1,17 +1,29 @@
-const API_URL = import.meta.env.VITE_APP_API_URL;
-const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
+import axios from "axios";
 
-export async function fetchRepos(username) {
-  const headers = API_KEY
-    ? { Authorization: `token ${API_KEY}` } // only add auth if key exists
-    : {};
+const API_URL = import.meta.env.VITE_APP_API_URL || "https://api.github.com";
+const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY; 
 
-  const res = await fetch(`${API_URL}/users/${username}/repos`, { headers });
+export async function fetchUserData(username) {
+  try {
+    const headers = API_KEY ? { Authorization: `token ${API_KEY}` } : {};
 
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`GitHub API error (${res.status}): ${errText}`);
+    const response = await axios.get(`${API_URL}/users/${username}`, {
+      headers,
+    });
+
+    return response.data; 
+  } catch (error) {
+    if (error.response) {
+      throw new Error(
+        `GitHub API Error (${error.response.status}): ${error.response.data.message}`
+      );
+    } else {
+      throw new Error("Network error. Please try again later.");
+    }
   }
-
-  return res.json();
+}
+export async function fetchRepos(username) {
+  const headers = API_KEY ? { Authorization: `token ${API_KEY}` } : {};
+  const res = await axios.get(`${API_URL}/users/${username}/repos`, { headers });
+  return res.data;
 }
