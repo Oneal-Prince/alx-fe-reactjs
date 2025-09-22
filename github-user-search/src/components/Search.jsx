@@ -31,7 +31,7 @@ export default function Search({ onSearch, user, loading, error }) {
 
     
       {loading && <p className="mt-4 text-gray-600">Loading...</p>}
-      {error && <p className="mt-4 text-red-500">{error}</p>}
+      {error && <p className="mt-4 text-red-500">Looks like we cant find the user</p>}
       {user && (
         <div className="mt-6 p-4 border rounded-lg shadow bg-white">
           <img
