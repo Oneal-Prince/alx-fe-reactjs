@@ -1,52 +1,28 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_APP_API_URL || "https://api.github.com";
-const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY; 
-
-const getHeaders = () => {
-  return API_KEY ? { Authorization: `token ${API_KEY}` } : {};
+export const fetchUserData = async (username) => {
+  const response = await axios.get(`https://api.github.com/users/${username}`);
+  return response.data;
 };
 
-export async function fetchUserData(username) {
-  try {
-    const response = await axios.get(`${API_URL}/users/${username}`, {
-      headers: getHeaders(),
-    });
-    return response.data;
-  } catch (error) {
-    handleError(error);
-  }
-}
+export const fetchRepos = async (username) => {
+  const response = await axios.get(`https://api.github.com/users/${username}/repos`);
+  return response.data;
+};
 
-export async function fetchRepos(username) {
-  try {
-    const response = await axios.get(`${API_URL}/users/${username}/repos`, {
-      headers: getHeaders(),
-    });
-    return response.data;
-  } catch (error) {
-    handleError(error);
-  }
-}
+export const searchUsers = async ({ query, location, minRepos }) => {
+  let searchQuery = query;
 
-
-export async function searchUsers(query) {
-  try {
-    const response = await axios.get(`${API_URL}/search/users?q=${query}`, {
-      headers: getHeaders(),
-    });
-    return response.data.items; 
-  } catch (error) {
-    handleError(error);
+  if (location) {
+    searchQuery += `+location:${location}`;
   }
-}
-
-function handleError(error) {
-  if (error.response) {
-    throw new Error(
-      `GitHub API Error (${error.response.status}): ${error.response.data.message}`
-    );
-  } else {
-    throw new Error("Network error. Please try again later.");
+  if (minRepos) {
+    searchQuery += `+repos:>=${minRepos}`;
   }
-}
+
+  const response = await axios.get(
+    `https://api.github.com/search/users?q=${searchQuery}`
+  );
+
+  return response.data.items; 
+};
