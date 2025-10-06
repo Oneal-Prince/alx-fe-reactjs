@@ -3,6 +3,8 @@ function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -22,7 +24,8 @@ function AddRecipeForm() {
               className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g. Spaghetti Bolognese"
             />
-     
+     {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+
           </div>
 
           <div>
@@ -33,6 +36,8 @@ function AddRecipeForm() {
               className="w-full border border-gray-300 rounded px-4 py-2 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="List ingredients, one per line"
             /> 
+             {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+
           </div>
           </form>
     </div>
