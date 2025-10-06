@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import data from '../data/data.json';
+import { useParams } from 'react-router-dom';
 
-
+  const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
