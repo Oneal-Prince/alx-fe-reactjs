@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 
 
  return (
-  <div className="p-4">
+  <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
     <h2 className="text-2xl font-bold mb-2">{recipe.title}</h2>
     <img src={recipe.image} alt={recipe.title} className="w-full h-auto mb-4" />
 
