@@ -1,5 +1,6 @@
 
 import HomePage from './components/HomePage'
+import RecipeDetail from './components/RecipeDetail'
 
 function App() {
   
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
     <HomePage />
+    <RecipeDetail />
     </>
   )
 }
