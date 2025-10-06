@@ -3,11 +3,15 @@ function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
 
   return ( 
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Add a New Recipe</h2>
-        <form  className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
       
           <div>
             <label className="block text-gray-700 font-semibold mb-2">Recipe Title</label>
